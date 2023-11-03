@@ -1,7 +1,6 @@
 # fastlog
-A log lib for cpp
-sample
-
+A log lib for cpp <br></br>
+sample:
 ```
 #include "log.hpp"
 using namespace std;
