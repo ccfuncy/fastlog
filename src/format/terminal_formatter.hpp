@@ -1,9 +1,13 @@
-#ifndef TXT_FORMATTER_HPP
-#define TXT_FORMATTER_HPP
+#ifndef TERMINAL_FORMATTER
+#define TERMINAL_FORMATTER
+#include <iostream>
+
 #include "../log.hpp"
 namespace ccfuncy {
 
-class TXTFormatter : public Formatter {
+class TerminalFormatter : virtual public Formatter {
+   public:
+    TerminalFormatter() : Formatter(std::cout){};
     string format(LogMessage* msg) override {
         stringstream ss;
         ss << ColorPlate[msg->level]

@@ -30,9 +30,10 @@ class LogMessage {
     string message;
     void operator<<(const string& msg) {
         message = msg;
-        string message =
-            ConfigCentor::getInstance()->getFormatter()->format(this);
-        cout << message;
+        auto formatter = ConfigCentor::getInstance()->getFormatter();
+        for (auto& formatt : formatter) {
+            formatt->outIO(this);
+        }
     }
     LogMessage(string _file, int _line, int _level)
         : line(_line), level(_level) {

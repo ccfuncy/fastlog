@@ -1,0 +1,4 @@
+I1107 11:45:15.873335    8390.    1 main.cpp:20] this is INFO msg
+W1107 11:45:15.873423    8390.    1 main.cpp:21] this is WARN msg
+D1107 11:45:15.873438    8390.    1 main.cpp:22] this is DEBUG msg
+E1107 11:45:15.873466    8390.    1 main.cpp:23] this is ERROR msg

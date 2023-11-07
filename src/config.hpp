@@ -3,10 +3,12 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 #include "enum.h"
-#include "formatter/formattr.hpp"
+#include "format/formatter.hpp"
 namespace ccfuncy {
-BETTER_ENUM(LogType, int, INFO, DEBUG, WARN, ERROR);
+BETTER_ENUM(LogType, int, DEBUG, INFO, WARN, ERROR, FATAL);
 #define LOG(logtype) LOG_##logtype
 #define LOG_INFO ccfuncy::LogMessage(__FILE__, __LINE__, ccfuncy::LogType::INFO)
 #define LOG_DEBUG \
@@ -25,14 +27,13 @@ BETTER_ENUM(LogType, int, INFO, DEBUG, WARN, ERROR);
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
 
-std::vector<string> ColorPlate{"", CYAN, YELLOW, RED};
-
+std::vector<string> ColorPlate{CYAN, "", YELLOW, RED};
 class LogMessage;
 class ConfigCentor {
    public:
-    Formatter* getFormatter() { return instance->formatter; };
+    vector<Formatter*> getFormatter() { return instance->formatter; };
     void setFormatter(Formatter* formatter) {
-        instance->formatter = formatter;
+        this->formatter.push_back(formatter);
     };
     static ConfigCentor* getInstance() {
         if (instance == nullptr) {
@@ -42,18 +43,20 @@ class ConfigCentor {
     }
 
    private:
-    Formatter* formatter;
+    vector<Formatter*> formatter;
     static ConfigCentor* instance;
 };
 ConfigCentor* ConfigCentor::instance = nullptr;
 
-void Init(Formatter* formatter, string filepath) {
+void Init(vector<Formatter*> formatter, string filepath) {
     auto instance = ccfuncy::ConfigCentor::getInstance();
     if (filepath != "") {
         //配置文件分支
     }
     //默认分支
-    instance->setFormatter(formatter);
+    for (auto format : formatter) {
+        instance->setFormatter(format);
+    }
 };
 
 }  // namespace ccfuncy
