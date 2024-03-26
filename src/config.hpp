@@ -48,17 +48,6 @@ class ConfigCentor {
 };
 ConfigCentor* ConfigCentor::instance = nullptr;
 
-void Init(vector<Formatter*> formatter, string filepath) {
-    auto instance = ccfuncy::ConfigCentor::getInstance();
-    if (filepath != "") {
-        //配置文件分支
-    }
-    //默认分支
-    for (auto format : formatter) {
-        instance->setFormatter(format);
-    }
-};
-
 }  // namespace ccfuncy
 
 #endif
