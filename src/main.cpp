@@ -11,11 +11,7 @@ using namespace std;
 using namespace ccfuncy;
 
 int main() {
-    auto os = openFile("./log.txt");
-    auto formatter = new TxtFormatter(os);
-    vector<Formatter*> formatters;
-    formatters.push_back(formatter);
-    ccfuncy::Init(formatters, "");
+    ccfuncy::Init();
 
     LOG(INFO) << "this is INFO msg";
     LOG(WARN) << "this is WARN msg";
